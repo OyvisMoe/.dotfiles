@@ -32,11 +32,11 @@
 			}
       {
         plugin = nvim-lspconfig;
-				config = toLuaFile ./nvim/plugin/lsp.lua;
+				config = toLuaFile ../../nvim/plugin/lsp.lua;
       }
 			{
 				plugin = nvim-cmp;
-				config = toLuaFile ./nvim/plugin/cmp.lua;
+				config = toLuaFile ../../nvim/plugin/cmp.lua;
 			}
 			cmp_luasnip
 			cmp-nvim-lsp
@@ -48,7 +48,7 @@
     ];
 
     extraLuaConfig = ''
-      ${builtins.readFile ./nvim/options.lua}
+      ${builtins.readFile ../../nvim/options.lua}
     '';
 
 		extraPackages = with pkgs; [
