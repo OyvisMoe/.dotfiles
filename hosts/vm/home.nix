@@ -1,8 +1,10 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports = [
-		/home/oyvismoe/.dotfiles/modules/home-manager/nvim-config.nix
+		inputs.hyprland.homeManagerModules.default
+		../../modules/home-manager/nvim/nvim.nix
+		../../modules/home-manager/hyprland.nix
 	];
 
   home.username = "oyvismoe";
@@ -12,18 +14,21 @@
 
   programs.bash = {
     enable = true;
-    
+		shellAliases = {
+			"dots" = "cd ~/.dotfiles";
+			"conf" = "cd ~/.dotfiles/hosts/vm";
+		};
   };
 
-  wayland.windowManager.hyprland = {
-    enable = true;
-  #
-  #   settings = {};
-  };
-
+	programs.git = {
+		enable = true;
+		userName = "OyvisMoe";
+		userEmail = "oyvindskjonhaug@gmail.com";
+	};
 
   home.packages = with pkgs; [
 		firefox
+		neofetch
   ];
 
   home.file = {

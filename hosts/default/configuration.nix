@@ -9,22 +9,20 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       inputs.home-manager.nixosModules.default
+			inputs.hyprland.nixosModules.default
     ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
 
   # hyprland
-  programs.hyprland.enable = false;
-  # programs.hyprland.package = inputs.hyprland.packages."${pkgs.system}".hyprland;
+  programs.hyprland = {
+		enable = true;
+		package = inputs.hyprland.packages."${pkgs.system}".hyprland;
+	};
 
   services.xserver = {
     enable = true;
-    desktopManager = {
-      xterm.enable = false;
-      xfce.enable = true;
-    };
-    displayManager.defaultSession = "xfce";
   };
 
   # Bootloader.
@@ -32,7 +30,7 @@
   boot.loader.grub.device = "/dev/sda";
   boot.loader.grub.useOSProber = true;
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "nixOS"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -50,8 +48,10 @@
 
   # Configure keymap in X11
   services.xserver = {
-    layout = "no";
-    xkbVariant = "";
+		xkb = {
+			layout = "no";
+			variant = "";
+		};
   };
 
   # Configure console keymap
@@ -78,12 +78,15 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+		lf
     neovim
     tmux
-		firefox
 		git
   ];
+
+	fonts.packages = with pkgs; [
+		(nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+	];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

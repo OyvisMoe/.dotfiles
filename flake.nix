@@ -8,6 +8,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprland.url = "github:hyprwm/Hyprland";
+		hyprland-plugins = {
+			url = "github:hyprwm/hyprland-plugins";
+			inputs.hyprland.follows = "hyprland";
+		};
   };
 
   outputs = { self, nixpkgs, ... }@inputs:
@@ -24,10 +28,10 @@
           ];
         };
 
-      nixosConfigurations.skjold = nixpkgs.lib.nixosSystem {
+      nixosConfigurations.VM = nixpkgs.lib.nixosSystem {
           specialArgs = {inherit inputs;};
           modules = [
-            ./hosts/skjold/configuration.nix
+            ./hosts/vm/configuration.nix
           ];
         };
 
