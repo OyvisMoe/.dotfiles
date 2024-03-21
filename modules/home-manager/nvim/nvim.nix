@@ -65,6 +65,10 @@
         plugin = nvim-autopairs;
         config = toLua "require('nvim-autopairs').setup {}";
       }
+      {
+        plugin = hop-nvim;
+        config = toLuaFile ./plugin/hop.lua;
+      }
       telescope-fzf-native-nvim
       nvim-web-devicons
     ];
