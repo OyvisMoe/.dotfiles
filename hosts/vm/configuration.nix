@@ -84,6 +84,8 @@
     tmux
     git
     xdragon
+    btop
+    tldr
   ];
 
   fonts.packages = with pkgs; [

@@ -18,8 +18,20 @@
     shellAliases = {
       "dots" = "cd ~/.dotfiles";
       "conf" = "cd ~/.dotfiles/hosts/vm";
+      ".." = "cd ..";
+      "..." = "cd ../..";
+      "la" = "ls -a";
+      "ll" = "ls -l";
     };
-  };
+    historyControl = [ "ignoredups" ];
+    historyIgnore = [
+      "ls"
+      "cd"
+    ];
+    bashrcExtra = ''
+      set -o vi
+      '';
+    };
 
   programs.git = {
     enable = true;
@@ -30,6 +42,8 @@
   home.packages = with pkgs; [
     firefox
     neofetch
+    bat
+    fzf
   ];
 
   home.file = {
