@@ -5,24 +5,25 @@
 { config, pkgs, inputs, ... }:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
-      inputs.home-manager.nixosModules.default
-			inputs.hyprland.nixosModules.default
-    ];
+  imports = [ # Include the results of the hardware scan.
+    ./hardware-configuration2.nix
+    inputs.home-manager.nixosModules.default
+    inputs.hyprland.nixosModules.default
+  ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
 
 
   # hyprland
   programs.hyprland = {
-		enable = true;
-		package = inputs.hyprland.packages."${pkgs.system}".hyprland;
-	};
+    enable = true;
+    package = inputs.hyprland.packages."${pkgs.system}".hyprland;
+  };
 
   services.xserver = {
     enable = true;
+    displayManager.sddm.enable = true;
+    desktopManager.plasma5.enable = true;
   };
 
   # Bootloader.
@@ -30,7 +31,7 @@
   boot.loader.grub.device = "/dev/sda";
   boot.loader.grub.useOSProber = true;
 
-  networking.hostName = "nixOS"; # Define your hostname.
+  networking.hostName = "VM"; # Define your hostname.
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Configure network proxy if necessary
@@ -48,10 +49,10 @@
 
   # Configure keymap in X11
   services.xserver = {
-		xkb = {
-			layout = "no";
-			variant = "";
-		};
+    xkb = {
+      layout = "no";
+      variant = "";
+    };
   };
 
   # Configure console keymap
@@ -78,15 +79,16 @@
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
-		lf
+    lf
     neovim
     tmux
-		git
+    git
+    xdragon
   ];
 
-	fonts.packages = with pkgs; [
-		(nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
-	];
+  fonts.packages = with pkgs; [
+    (nerdfonts.override { fonts = [ "JetBrainsMono" ]; })
+  ];
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -114,5 +116,5 @@
   # Before changing this value read the documentation for this option
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.11"; # Did you read the comment?
-
 }
+
