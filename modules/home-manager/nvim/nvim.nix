@@ -53,6 +53,7 @@
       }
       {
         plugin = (nvim-treesitter.withPlugins (p: [
+          p.tree-sitter-c
           p.tree-sitter-nix
           p.tree-sitter-vim
           p.tree-sitter-bash
@@ -84,9 +85,16 @@
       # LSP
       lua-language-server
       nixd
+      ccls
+      haskell-language-server
       # Telescope
       fd
       ripgrep
     ];
   };
+
+  home.packages = with pkgs; [
+    gcc
+    ghc
+  ];
 }
