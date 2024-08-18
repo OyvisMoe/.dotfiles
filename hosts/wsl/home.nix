@@ -24,6 +24,9 @@
     neofetch
     bat
     fzf
+    bitwarden-cli
+    tldr
+    texliveMedium
   ];
 
   home.file = {
