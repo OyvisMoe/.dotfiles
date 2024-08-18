@@ -39,7 +39,14 @@
       }
         cmp_luasnip
         cmp-nvim-lsp
-        luasnip
+      {
+        plugin = luasnip;
+        config = toLuaFile ./plugin/luasnip.lua;
+      }
+      {
+        plugin = vimtex;
+        config = toLuaFile ./plugin/vimtex.lua;
+      }
 
         # lualine-nvim
 
@@ -92,5 +99,4 @@
       ripgrep
     ];
   };
-
 }
