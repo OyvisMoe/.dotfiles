@@ -3,12 +3,11 @@
 {
   imports = [
     inputs.hyprland.homeManagerModules.default
-    ../../modules/home-manager/nvim/nvim.nix
-    ../../modules/home-manager/hyprland.nix
+    ../../modules/hm-modules.nix
   ];
 
-  home.username = "oyvismoe";
-  home.homeDirectory = "/home/oyvismoe";
+  home.username = "oyvindms";
+  home.homeDirectory = "/home/oyvindms";
 
   home.stateVersion = "23.11"; # Please read the comment before changing.
 
@@ -24,11 +23,10 @@
 
   home.packages = with pkgs; [
     firefox
-    neofetch
+    bat
+    fzf
+    bitwarden-cli
   ];
-
-  home.file = {
-  };
 
   home.sessionVariables = {
     EDITOR = "nvim";
