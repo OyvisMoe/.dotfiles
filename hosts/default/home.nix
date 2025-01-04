@@ -22,10 +22,13 @@
   };
 
   home.packages = with pkgs; [
+    btop
+    fastfetch
+    hyfetch
     firefox
     bat
     fzf
-    bitwarden-cli
+    pipes
   ];
 
   home.sessionVariables = {
