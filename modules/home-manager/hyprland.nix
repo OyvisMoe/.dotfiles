@@ -1,39 +1,62 @@
 { pkgs, lib, inputs, ... }:
 
 {
+  imports = [
+    ./hyprland/keybinds.nix
+  ];
+
   wayland.windowManager.hyprland = {
     enable = true;
     settings = {
-      "$mod" = "SUPER";
-      bind = [
-        "$mod, B, exec, firefox"
-        "$mod, ENTER, exec, kitty"
-      ]
-      ++ (
-      # workspaces
-      # binds $mod + [shift +] {1..10} to [move to] workspace {1..10}
-        builtins.concatLists (builtins.genList (
-          x: let
-            ws = let
-              c = (x + 1) / 10;
-            in
-            builtins.toString (x + 1 - (c * 10));
-          in [
-            "$mod, ${ws}, workspace, ${toString (x + 1)}"
-            "$mod SHIFT, ${ws}, movetoworkspace, ${toString (x + 1)}"
-          ]
-        )
-        10)
-      );
+
+      ### INPUT ###
+
+      input = {
+        kb_layout = "no";
+        kb_options = "caps:swapescape";
+
+        touchpad = {
+          natural_scroll = true;
+          scroll_factor = 0.15;
+          tap-and-drag = true;
+        };
+      };
     };
-    # plugins = with inputs.hyprland-plugins.packages.${pkgs.system}; [
-    #     hyprbars
-    #     hyprtrails
-    #     hyprwinwrap
-    # ];
+
+    plugins = with inputs.hyprland-plugins.packages.${pkgs.system}; [
+      # hyprbars
+      hyprexpo
+    
+      # hyprtrails
+      # hyprwinwrap
+    ];
+
+    extraConfig = ''
+      exec-once = waybar
+    '';
   };
 
   home.packages = with pkgs; [
-    kitty
+    hyprpaper
+    kitty-themes
   ];
+
+  programs.kitty = {
+    enable = true;
+    settings = {
+      # background_opacity = 0.7;
+      confirm_os_window_close = -1;
+    };
+    themeFile = "Catppuccin-Macchiato";
+  };
+
+  programs.waybar = {
+    enable = true;
+    settings = {
+    };
+  };
+
+  services.hyprpaper = {
+    enable = true;
+  };
 }
