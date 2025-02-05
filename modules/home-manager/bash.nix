@@ -4,7 +4,7 @@
     enable = true;
     shellAliases = {
       "dots" = "cd ~/.dotfiles";
-      "conf" = "cd ~/.dotfiles/hosts/vm";
+      "conf" = "cd ~/.dotfiles/hosts/default";
       ".." = "cd ..";
       "..." = "cd ../..";
       "la" = "ls -a";
@@ -14,6 +14,7 @@
     historyIgnore = [
       "ls"
       "ll"
+      "lf"
       "la"
       "cd"
       ".."
