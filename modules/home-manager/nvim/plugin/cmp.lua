@@ -1,8 +1,6 @@
 local cmp = require('cmp')
 local luasnip = require('luasnip')
 
--- require('luasnip.loaders.from_vscode').lazy_load()
-
 cmp.setup {
     snippet = {
         expand = function(args)
@@ -19,18 +17,14 @@ cmp.setup {
             behavior = cmp.ConfirmBehavior.Replace,
             select = true,
         },
-        ['<Tab>'] = cmp.mapping(function(fallback)
-            -- if cmp.visible() then
-            --     cmp.select_next_item()
+        ['jk'] = cmp.mapping(function(fallback)
             if luasnip.expand_or_locally_jumpable() then
                 luasnip.expand_or_jump()
             else
                 fallback()
             end
         end, { 'i', 's' }),
-        ['<S-Tab>'] = cmp.mapping(function(fallback)
-            -- if cmp.visible() then
-            --     cmp.select_prev_item()
+        ['JK'] = cmp.mapping(function(fallback)
             if luasnip.locally_jumpable(-1) then
                 luasnip.jump(-1)
             else
