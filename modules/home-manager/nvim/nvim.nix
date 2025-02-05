@@ -43,10 +43,10 @@
         plugin = luasnip;
         config = toLuaFile ./plugin/luasnip.lua;
       }
-      {
-        plugin = vimtex;
-        config = toLuaFile ./plugin/vimtex.lua;
-      }
+#      {
+        # plugin = vimtex;
+        # config = toLuaFile ./plugin/vimtex.lua;
+#      }
 
         # lualine-nvim
 
@@ -89,11 +89,13 @@
     extraPackages = with pkgs; [
       # Clipboard
       xclip
+
       # LSP
       lua-language-server
       nixd
       ccls
       haskell-language-server
+
       # Telescope
       fd
       ripgrep
