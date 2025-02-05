@@ -25,7 +25,10 @@
     bat
     fzf
     bitwarden-cli
+
     tldr
+
+    sioyek
     texliveMedium
   ];
 
