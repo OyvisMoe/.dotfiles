@@ -3,6 +3,7 @@
 {
   imports = [
     ./hyprland/keybinds.nix
+    ./hyprland/decoration.nix
   ];
 
   wayland.windowManager.hyprland = {
